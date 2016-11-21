@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#box {width:100px; height:100px; background: red;}
+		.cube {width:50px; height: 50px; background: yellow;}
+		#container div {width:300px; height:20px; margin:5px; background: red;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			/*$("#box").click(function(){
+				console.log("click.......");
+			});*/
+
+			/*$("#box").bind("click", function(){
+				console.log("bind click....");
+			});*/
+
+			/*$("#container>div").click(function() {
+				console.log("div click...")
+			});*/
+
+			/*$("#container>div").bind("click", function(){
+				console.log("bind click....");
+			});*/
+
+			/*$("#container>div").on("click", function(){
+				console.log("on click....")
+			});*/
+
+			// 利用事件冒泡，将后代元素的事件处理委派给祖先元素处理
+			/*$("#container").delegate('div', 'click', function() {
+				console.log("delegate click...")
+			});
+
+			$("#container").append("<div></div>");*/
+
+			/*$("#container").on("click","div",function(){
+				console.log("on delegate click....")
+			});*/
+
+			// $("#box").data("dat", "附加数据...");
+
+			// var $box = $("#box").remove();
+			// console.log($box);
+			// var $box = $("#box").detach();
+			// $(".another").append($box);
+
+			// console.log($("#box").data("dat"))
+
+			$("#box").on("myEvent", function(e, a, b){
+				console.log("in myEvent....");
+				console.log(a, b);
+				console.log(a * b);
+			});
+
+			$("#box").click(function() {
+				$(this).trigger("myEvent", [3, 4]); // 触发指定事件 
+			});
+
+			/*$("#box").mouseover(function(){
+				console.log("over.....");
+			});*/
+			/*$("#box").mouseenter(function(){
+				console.log("enter.....");
+			});*/
+
+			/*$("#box").mouseenter(function() {
+				console.log("enter....");
+			}).mouseleave(function() {
+				console.log("leave...");
+			});*/
+
+			// hover : 事件合成方法
+			// 合成：mouseenter mouseleave
+			$("#box").hover(function(){
+				console.log("enter...")
+			}, function(){
+				console.log("leave...")
+			}).mouseenter();  // .trigger('mouseenter');
+		});
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div class="cube"></div>
+	</div>
+
+	<div class="another"></div>
+
+	<div id="container">
+		<div></div>
+	</div>
+</body>
+</html>
